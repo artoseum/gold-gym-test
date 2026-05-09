@@ -120,6 +120,21 @@ export default function Sidebar({ onAdminTrigger }) {
         {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
       </NavLink>
 
+      {/* Admin Quick Link */}
+      {user?.isAdmin && (
+        <button 
+          className="sidebar-link" 
+          onClick={() => {
+            onAdminTrigger?.();
+            setMobileOpen(false);
+          }}
+          style={{ color: 'var(--gold-primary)' }}
+        >
+          <Shield size={18} />
+          <span>Admin Panel</span>
+        </button>
+      )}
+
       {/* Logout */}
       <button className="sidebar-logout" onClick={handleLogout}>
         <LogOut size={16} />

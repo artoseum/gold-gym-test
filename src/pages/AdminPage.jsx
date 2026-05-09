@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Shield, X, Trash2, Ban, UserX, Eye, ChevronDown, ChevronUp, Flag } from 'lucide-react';
 import { useAuthStore, useMembershipStore, useSocialStore } from '../store/stores';
 import { formatDate, timeAgo } from '../utils/helpers';
+import { CITIES } from '../data/gymData';
 import './AdminPage.css';
 
 export default function AdminPage({ onClose }) {
@@ -13,12 +14,36 @@ export default function AdminPage({ onClose }) {
   const { posts, reports, deletePost, deleteUserContent } = useSocialStore();
   const currentUid = useAuthStore((s) => s.currentUser?.uid);
 
-  const [tab, setTab] = useState('users');
+  const [tab, setTab] = useState('overview');
   const [expandedUser, setExpandedUser] = useState(null);
 
   const userList = Object.values(allUsers).filter((u) => u.uid !== currentUid);
   const reportedPostIds = [...new Set(reports.map((r) => r.postId))];
   const reportedPosts = posts.filter((p) => reportedPostIds.includes(p.id) && !p.deleted);
+
+  // Compute stats efficiently
+  const activeMemberships = Object.values(memberships).filter(m => m.status === 'active' && Date.now() < m.expiresAt).length;
+  const userPostCounts = {};
+  const userCommentCounts = {};
+  
+  posts.forEach(p => {
+    if (!p.deleted) {
+      userPostCounts[p.uid] = (userPostCounts[p.uid] || 0) + 1;
+      p.comments.forEach(c => {
+        userCommentCounts[c.uid] = (userCommentCounts[c.uid] || 0) + 1;
+      });
+    }
+  });
+
+  // Helper to get gym name
+  const getGymName = (gymId) => {
+    if (!gymId) return 'None';
+    for (const city of CITIES) {
+      const gym = city.gyms.find(g => g.id === gymId);
+      if (gym) return gym.name;
+    }
+    return gymId;
+  };
 
   return (
     <div className="admin-overlay">
@@ -39,6 +64,9 @@ export default function AdminPage({ onClose }) {
         </div>
 
         <div className="admin-tabs">
+          <button className={`admin-tab ${tab === 'overview' ? 'active' : ''}`} onClick={() => setTab('overview')}>
+            Overview
+          </button>
           <button className={`admin-tab ${tab === 'users' ? 'active' : ''}`} onClick={() => setTab('users')}>
             Users ({userList.length})
           </button>
@@ -51,6 +79,35 @@ export default function AdminPage({ onClose }) {
         </div>
 
         <div className="admin-content">
+          {/* Overview Tab */}
+          {tab === 'overview' && (
+            <div className="flex flex-col gap-16 animate-fade-in">
+              <div className="admin-stat-grid">
+                <div className="admin-stat-box">
+                  <div className="admin-stat-val">{userList.length}</div>
+                  <div className="admin-stat-lbl">Total Users</div>
+                </div>
+                <div className="admin-stat-box">
+                  <div className="admin-stat-val text-gold">{activeMemberships}</div>
+                  <div className="admin-stat-lbl">Active Members</div>
+                </div>
+                <div className="admin-stat-box">
+                  <div className="admin-stat-val">{posts.filter(p => !p.deleted).length}</div>
+                  <div className="admin-stat-lbl">Total Posts</div>
+                </div>
+                <div className="admin-stat-box">
+                  <div className="admin-stat-val" style={{ color: reportedPosts.length > 0 ? 'var(--error)' : 'var(--success)' }}>
+                    {reportedPosts.length}
+                  </div>
+                  <div className="admin-stat-lbl">Pending Reports</div>
+                </div>
+              </div>
+              <div className="card mt-16">
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>System Status</h3>
+                <p className="text-muted text-sm">All systems operational. The portal is running in memory with optimized localized storage. Demo users and data have been successfully seeded.</p>
+              </div>
+            </div>
+          )}
           {/* Users Tab */}
           {tab === 'users' && (
             <div className="flex flex-col gap-10">
@@ -82,6 +139,14 @@ export default function AdminPage({ onClose }) {
                         <div className="admin-detail-row">
                           <span>Auth Method</span>
                           <strong>{user.authMethod}</strong>
+                        </div>
+                        <div className="admin-detail-row">
+                          <span>Home Gym</span>
+                          <strong>{getGymName(user.registeredGym)}</strong>
+                        </div>
+                        <div className="admin-detail-row">
+                          <span>Social Activity</span>
+                          <strong>{userPostCounts[user.uid] || 0} posts, {userCommentCounts[user.uid] || 0} comments</strong>
                         </div>
                         <div className="admin-detail-row">
                           <span>Joined</span>

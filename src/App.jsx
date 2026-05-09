@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastProvider } from './components/Toast';
 import AppLayout from './components/AppLayout';
@@ -9,10 +10,15 @@ import SocialPage from './pages/SocialPage';
 import HealthPage from './pages/HealthPage';
 import MarketplacePage from './pages/MarketplacePage';
 import CartPage from './pages/CartPage';
+import { seedAppStore } from './store/stores';
 import './index.css';
 import './App.css';
 
 export default function App() {
+  useEffect(() => {
+    seedAppStore();
+  }, []);
+
   return (
     <BrowserRouter>
       <ToastProvider>

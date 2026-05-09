@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { generateSeedData } from '../data/seedData';
 
 // ─── Auth Store ──────────────────────────────────────────────────────────────
 export const useAuthStore = create(
@@ -343,3 +344,29 @@ export const useMarketStore = create(
     { name: 'gg_market' }
   )
 );
+
+// ─── Data Seeding ─────────────────────────────────────────────────────────────
+export const seedAppStore = () => {
+  const authState = useAuthStore.getState();
+  const socialState = useSocialStore.getState();
+  const membershipState = useMembershipStore.getState();
+
+  // If we already have more than 5 users, assume it's seeded or active
+  if (Object.keys(authState.allUsers).length > 5) return;
+
+  console.log('Seeding demo data...');
+  const data = generateSeedData();
+
+  useAuthStore.setState((state) => ({
+    allUsers: { ...data.users, ...state.allUsers }
+  }));
+
+  useMembershipStore.setState((state) => ({
+    memberships: { ...data.memberships, ...state.memberships }
+  }));
+
+  useSocialStore.setState((state) => ({
+    usernames: { ...data.usernames, ...state.usernames },
+    posts: [...state.posts, ...data.posts]
+  }));
+};
