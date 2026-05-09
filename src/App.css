@@ -1,0 +1,19 @@
+/* App.css – minimal overrides, main design is in index.css */
+
+/* Clear default Vite styles */
+#root {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* Smooth route transitions */
+.animate-fade-in {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+/* ml-4 helper not in index.css */
+.ml-4 { margin-left: 4px; }
+.ml-8 { margin-left: 8px; }

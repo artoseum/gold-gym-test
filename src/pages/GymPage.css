@@ -1,0 +1,186 @@
+.gym-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .gym-layout { grid-template-columns: 1fr; }
+}
+
+.booking-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02));
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .booking-banner {
+    flex-direction: column;
+    padding: 16px;
+  }
+}
+
+.booking-banner-gym {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.booking-banner-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.slot-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: left;
+  color: var(--text-primary);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slot-card:hover:not(.disabled) {
+  border-color: var(--gold-primary);
+  background: var(--gold-muted);
+}
+
+.slot-card.selected {
+  border-color: var(--gold-primary);
+  background: var(--gold-muted);
+  box-shadow: 0 0 0 1px var(--gold-primary);
+}
+
+.slot-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .slot-card { padding: 12px; gap: 10px; }
+}
+
+.slot-emoji { font-size: 1.3rem; flex-shrink: 0; }
+
+.slot-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.slot-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.slot-occ {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.slot-check {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: var(--gold-primary);
+}
+
+.gym-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gold-muted);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .gym-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+}
+
+.gym-stats-row {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.gym-stat {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.gym-stat:last-child { border-right: none; }
+
+.gym-stat-val {
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.gym-stat-lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 480px) {
+  .gym-stat-val { font-size: 1.1rem; }
+  .gym-stat-lbl { font-size: 0.6rem; }
+}
+
+.occ-block {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.occ-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.gym-selector {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 900px) {
+  .gym-selector { position: static; }
+}

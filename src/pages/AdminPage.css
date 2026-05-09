@@ -1,0 +1,194 @@
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-panel {
+  width: 100%;
+  max-width: 460px;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .admin-panel {
+    max-width: 100%;
+    border-left: none;
+  }
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  padding-top: calc(16px + var(--safe-top));
+  background: linear-gradient(135deg, #1a1000, var(--bg-surface));
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-badge-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a0c;
+}
+
+.admin-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--gold-primary);
+}
+
+.admin-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-tab {
+  flex: 1;
+  padding: 12px 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-tab.active {
+  color: var(--gold-primary);
+  border-bottom-color: var(--gold-primary);
+  background: var(--gold-muted);
+}
+
+.admin-badge {
+  background: var(--error);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: calc(16px + var(--safe-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 20px;
+  font-size: 0.875rem;
+}
+
+.admin-user-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.admin-user-card.banned {
+  border-color: rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.admin-user-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-user-header:hover { background: var(--bg-elevated); }
+
+.admin-user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #0a0a0c;
+  flex-shrink: 0;
+}
+
+.admin-user-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.admin-user-details {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.admin-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+
+.admin-detail-row:last-of-type { border-bottom: none; }
+.admin-detail-row span { color: var(--text-muted); flex-shrink: 0; }
+.admin-detail-row strong { text-align: right; }
+
+.admin-user-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-report-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.admin-report-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}

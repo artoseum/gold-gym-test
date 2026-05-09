@@ -1,0 +1,118 @@
+.health-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .health-layout { grid-template-columns: 1fr; }
+}
+
+.log-form {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 768px) {
+  .log-form { position: static; }
+}
+
+.log-type-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.log-type-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.log-type-btn.active {
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .log-type-btn { padding: 8px 6px; font-size: 0.7rem; gap: 4px; }
+}
+
+.health-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .health-stats-row { gap: 8px; }
+}
+
+.health-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+@media (max-width: 480px) {
+  .health-stat-card { padding: 12px; }
+}
+
+.health-stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .health-stat-val { font-size: 1.2rem; }
+}
+
+.health-stat-lbl {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 480px) {
+  .health-stat-lbl { font-size: 0.65rem; }
+}
+
+.log-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition);
+}
+
+.log-item:hover {
+  border-color: var(--border-active);
+}
+
+.log-item-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .log-item { gap: 10px; }
+  .log-item-icon { font-size: 1.2rem; }
+}
