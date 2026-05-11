@@ -18,6 +18,11 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  background-image: 
+    linear-gradient(rgba(10, 10, 12, 0.75), rgba(10, 10, 12, 0.95)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gold%27s_Gym_in_Venice%2C_CA.jpg/1920px-Gold%27s_Gym_in_Venice%2C_CA.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .login-bg-orb {
